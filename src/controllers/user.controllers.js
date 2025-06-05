@@ -25,6 +25,8 @@ const generateAccessAndRefereshTokens = async(userId) =>{
 }
 
 const registerUser = asyncHandler( async (req, res) => {
+// console.log("🧾 req.body:", req.body);
+// console.log("🖼️ req.files:", req.files);
     // get user details from frontend
     // validation - not empty
     // check if user already exists: username, email
@@ -52,7 +54,7 @@ const registerUser = asyncHandler( async (req, res) => {
     if (existedUser) {
         throw new ApiError(409, "User with email or username already exists")
     }
-    //console.log(req.files);
+    // console.log(req.files);
 
     const avatarLocalPath = req.files?.avatar[0]?.path;
     //const coverImageLocalPath = req.files?.coverImage[0]?.path;
@@ -69,9 +71,9 @@ const registerUser = asyncHandler( async (req, res) => {
 
     const avatar = await uploadOnCloudinary(avatarLocalPath)
     const coverImage = await uploadOnCloudinary(coverImageLocalPath)
-    console.log("Received files:", req.files);
+    // console.log("Received files:", req.files);
     if (!avatar) {
-        throw new ApiError(400, "Avatar file is required")
+        throw new ApiError(400, "avatar file is required")
     }
    
 
